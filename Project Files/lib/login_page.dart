@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
         });
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailTextController.text, password: passwordTextController.text);
-
     Navigator.pop(context);
   }
 
@@ -40,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xffD6E2EA),
+      backgroundColor: const Color(0xffD6E2EA),
       body: SafeArea(
         child: Center(
             child: Padding(
@@ -139,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
+                      child: const Text(
                         "Hemen üye ol",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),

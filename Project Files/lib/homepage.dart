@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
+        actions: const [
           IconButton(onPressed: SignUserOut, icon: Icon(Icons.logout))
         ],
       ),
@@ -31,15 +31,15 @@ class _HomePageState extends State<HomePage>{
 
             },
             tooltip: 'Kamera ile Çek',
-            child: Icon(Icons.camera_alt, color: Colors.deepPurpleAccent.shade200),
             backgroundColor: Colors.white,
+            child: Icon(Icons.camera_alt, color: Colors.deepPurpleAccent.shade200),
           ),
         ],
       ),
-      bottomNavigationBar: CurvedNavigationBar(animationDuration: Duration(milliseconds: 400), backgroundColor: Colors.deepPurpleAccent.shade200, items: [
+      bottomNavigationBar: CurvedNavigationBar(animationDuration: const Duration(milliseconds: 400), backgroundColor: Colors.deepPurpleAccent.shade200, items: [
         Icon(Icons.favorite, color: Colors.red.shade700),
-        Icon(Icons.home),
-        Icon(Icons.person)
+        const Icon(Icons.home),
+        const Icon(Icons.person)
       ],
       ),
     );

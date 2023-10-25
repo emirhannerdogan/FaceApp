@@ -34,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailTextController.text,
           password: passwordTextController.text);
       if (context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       Navigator.pop(context);
     }
   }
@@ -114,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
+                      child: const Text(
                         "Hemen giriş yap",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
