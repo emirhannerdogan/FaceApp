@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: size.width,
                 height: 200,
                 child: RiveAnimation.asset(
-                  'images/login_char.riv',
+                  'assets/login_char.riv',
                   stateMachines: const ["Login Machine"],
                   onInit: (artboard) {
                     controller = StateMachineController.fromArtboard(
