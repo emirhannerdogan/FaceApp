@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: passwordTextController,
                 obscureText: true, // to hide password
                 decoration: InputDecoration(
-                  hintText: "Şifre",
+                  hintText: "Password",
                   prefixIcon: const Icon(Icons.lock),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
 
               MyButton(
                 onTap: signUserIn,
-                buttonText: "Giriş Yap",
+                buttonText: "Log in",
               ),
 
               const SizedBox(
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Üye değil misin?",
+                    "Not a member yet?",
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        "Hemen üye ol",
+                        "Create account",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       ))
