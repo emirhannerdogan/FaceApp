@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
 
               Text(
-                "Hemen kayıt ol",
+                "SIGN UP NOW!",
                 style: TextStyle(color: Colors.grey[700]),
               ),
 
@@ -68,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               MyTextField(
                   controller: emailTextController,
-                  hintText: 'Email',
+                  hintText: 'E-mail',
                   obscureText: false),
 
               const SizedBox(
@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               MyTextField(
                   controller: passwordTextController,
-                  hintText: 'Şifre',
+                  hintText: 'Password',
                   obscureText: true),
 
               const SizedBox(
@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               MyTextField(
                   controller: confirmPasswordTextController,
-                  hintText: 'Şifrenizi Tekrar Giriniz',
+                  hintText: 'Enter password again',
                   obscureText: true),
 
               const SizedBox(
@@ -95,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               MyButton(
                 onTap: signUp,
-                buttonText: "Kayıt Ol",
+                buttonText: "Sign up",
               ),
 
               const SizedBox(
@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Zaten bir hesabın var mı?",
+                    "Already a user?",
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(
@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        "Hemen giriş yap",
+                        "Log in",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       ))
