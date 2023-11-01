@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:faceapp/Components/home_page_message_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,24 +15,42 @@ void SignUserOut() {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  static const backgroundColor = Color.fromRGBO(31, 29, 54, 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: const [
-          IconButton(onPressed: SignUserOut, icon: Icon(Icons.logout))
-        ],
+
+      body: SafeArea(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+
+              children: [
+                HomePageMessageBox(
+                  username: 'Alper Özdemir',
+                  message: 'Emirhan bu ödevi yapamaz',
+                  shortName: 'AÖ',
+                ),
+                SizedBox(height: 10),
+                HomePageMessageBox(
+                  username: 'Emirhan Erdoğan',
+                  message: 'Alper yine zorla spora götürdü',
+                  shortName: 'EE',
+                ),
+                SizedBox(height: 10,),
+                HomePageMessageBox(
+                  username: 'Eren Başpınar',
+                  message: 'Bizi kimse sevmedi albayım',
+                  shortName: 'EB',
+                )
+              ]
+            ),
+          )
       ),
-      backgroundColor: Colors.deepPurpleAccent.shade200,
-      bottomNavigationBar: CurvedNavigationBar(
-        animationDuration: const Duration(milliseconds: 400),
-        backgroundColor: Colors.deepPurpleAccent.shade200,
-        items: [
-          Icon(Icons.favorite, color: Colors.red.shade700),
-          const Icon(Icons.home),
-          const Icon(Icons.person)
-        ],
-      ),
+      backgroundColor: backgroundColor,
     );
   }
 }
