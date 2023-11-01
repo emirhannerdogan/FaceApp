@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953519411090",
+    "project_id": "faceapp-cse",
+    "storage_bucket": "faceapp-cse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953519411090:android:265dacc79d5e2fd7c7bb4b",
+        "android_client_info": {
+          "package_name": "com.faceappdev.faceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQLbKM-5WQyydblgoN_WE2riUNe0p7-kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

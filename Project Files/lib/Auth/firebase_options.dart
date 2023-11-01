@@ -44,40 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB6-C3LxhFr55ZRL4TxZZXZ4YS867hRA70',
-    appId: '1:481442611957:web:b9a1aa65c97828ef313bbc',
-    messagingSenderId: '481442611957',
-    projectId: 'questionapp-4e473',
-    authDomain: 'questionapp-4e473.firebaseapp.com',
-    storageBucket: 'questionapp-4e473.appspot.com',
-    measurementId: 'G-4ERKTZKBKP',
+    apiKey: 'AIzaSyB5wDuejysUBZp-rw9HD6R5saK_WxdjhJ8',
+    appId: '1:953519411090:web:e38b0ce8689f2e0ec7bb4b',
+    messagingSenderId: '953519411090',
+    projectId: 'faceapp-cse',
+    authDomain: 'faceapp-cse.firebaseapp.com',
+    storageBucket: 'faceapp-cse.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBVUqGnswukE97kTesRx_n9PZ_KXywZh1k',
-    appId: '1:481442611957:android:c06e541fbd61414e313bbc',
-    messagingSenderId: '481442611957',
-    projectId: 'questionapp-4e473',
-    storageBucket: 'questionapp-4e473.appspot.com',
+    apiKey: 'AIzaSyCQLbKM-5WQyydblgoN_WE2riUNe0p7-kc',
+    appId: '1:953519411090:android:265dacc79d5e2fd7c7bb4b',
+    messagingSenderId: '953519411090',
+    projectId: 'faceapp-cse',
+    storageBucket: 'faceapp-cse.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCfQK4R3zU_oNp4uxajPHtqQSaD59sxgo0',
-    appId: '1:481442611957:ios:cc8e7f0bfe4d2146313bbc',
-    messagingSenderId: '481442611957',
-    projectId: 'questionapp-4e473',
-    storageBucket: 'questionapp-4e473.appspot.com',
-    iosClientId: '481442611957-o398dr4sdt6qangc1rocv4cdhdpasl7b.apps.googleusercontent.com',
-    iosBundleId: 'com.example.questionsApp',
+    apiKey: 'AIzaSyAy-OpadKBHoDRU3uUMVnMH3rG-OLeuHp4',
+    appId: '1:953519411090:ios:25ea95356ecc1e44c7bb4b',
+    messagingSenderId: '953519411090',
+    projectId: 'faceapp-cse',
+    storageBucket: 'faceapp-cse.appspot.com',
+    iosBundleId: 'com.example.faceapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCfQK4R3zU_oNp4uxajPHtqQSaD59sxgo0',
-    appId: '1:481442611957:ios:a50be33843011d29313bbc',
-    messagingSenderId: '481442611957',
-    projectId: 'questionapp-4e473',
-    storageBucket: 'questionapp-4e473.appspot.com',
-    iosClientId: '481442611957-b0gtpstulv2rap5hibejsu08ulunl68t.apps.googleusercontent.com',
-    iosBundleId: 'com.example.questionsApp.RunnerTests',
+    apiKey: 'AIzaSyAy-OpadKBHoDRU3uUMVnMH3rG-OLeuHp4',
+    appId: '1:953519411090:ios:374845839b1ec09fc7bb4b',
+    messagingSenderId: '953519411090',
+    projectId: 'faceapp-cse',
+    storageBucket: 'faceapp-cse.appspot.com',
+    iosBundleId: 'com.example.faceapp.RunnerTests',
   );
 }
