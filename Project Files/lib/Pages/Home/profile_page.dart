@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../Components/profile_page_box.dart';
+
 class ProfilePage extends StatelessWidget {
   static const backgroundColor = Color.fromRGBO(31, 29, 54, 1);
 
@@ -7,14 +9,54 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: const Text(
-          "Profile Page",
-          style: TextStyle(color: Colors.white, fontSize: 25),
+      body: SafeArea(child: Center(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              CircleAvatar(
+                radius: screenSize.height * 0.08,
+                backgroundColor: Color.fromRGBO(233, 166, 166, 1),
+                child: const Icon(
+                    Icons.person,
+                    size: 100,
+                    color: Color.fromRGBO(31, 29, 54, 1),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Eren Başpınar",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const ProfilePageBox(
+                  icon: Icons.key,
+                  text: "Account"
+              ),
+              SizedBox(height: 10,),
+              const ProfilePageBox(
+                  icon: Icons.settings,
+                  text: "Settings"
+              ),
+
+            ]
         ),
-      ),
+      ),),
       backgroundColor: backgroundColor,
     );
   }
