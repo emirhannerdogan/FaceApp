@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (passwordTextController.text != confirmPasswordTextController.text) {
       Navigator.pop(context);
-      // Show message here
+      passwordMatchMessage();
       return;
     }
 
@@ -34,9 +34,134 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailTextController.text,
           password: passwordTextController.text);
       if (context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException {
+    } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
+      if (e.code == 'network-request-failed') {
+        networkErrorMessage();
+      } else if (e.code == 'invalid-email') {
+        invalidEmailMessage();
+      } else if (e.code == 'email-already-in-use') {
+        emailAlreadyUsedMessage();
+      } else if (e.code == 'weak-password') {
+        weakPasswordMessage();
+      } else {
+        generalErrorMessage();
+      }
     }
+  }
+
+  void passwordMatchMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Passwords do not match"),
+            content: const Text(
+                "Please make sure your passwords match and try again."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void networkErrorMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Network error"),
+            content: const Text(
+                "Please check your internet connection and try again later."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void emailAlreadyUsedMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("E-mail already in use"),
+            content: const Text(
+                "Please use another e-mail or log in to your account."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void weakPasswordMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Weak password"),
+            content: const Text(
+                "Please make sure your password is at least 6 characters long and try again later."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void invalidEmailMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Invalid E-mail"),
+            content: const Text(
+                "Please make sure your e-mail is correct and try again later."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void generalErrorMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: const Text(
+                "Please try again later. If the problem persists, please contact us"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
   }
 
   @override

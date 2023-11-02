@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
               ),
               CircleAvatar(
                 radius: screenSize.height * 0.08,
-                backgroundColor: Color.fromRGBO(233, 166, 166, 1),
+                backgroundColor: const Color.fromRGBO(233, 166, 166, 1),
                 child: const Icon(
                     Icons.person,
                     size: 100,
@@ -48,7 +48,7 @@ class ProfilePage extends StatelessWidget {
                   icon: Icons.key,
                   text: "Account"
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               const ProfilePageBox(
                   icon: Icons.settings,
                   text: "Settings"

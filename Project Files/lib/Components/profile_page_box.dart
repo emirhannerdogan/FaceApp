@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePageBox extends StatelessWidget{
@@ -26,16 +25,16 @@ class ProfilePageBox extends StatelessWidget{
             height: screenSize.height * 0.07,
             child: Row(
               children: [
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 Transform.rotate(
                   angle: 90 * 3.1415926535897932 / 180,
                   child: Icon(
                     icon,
                     size: 30,
-                    color: Color.fromRGBO(233, 166, 166, 1),
+                    color: const Color.fromRGBO(233, 166, 166, 1),
                   ),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 Text(
                     text,
                     style: const TextStyle(
