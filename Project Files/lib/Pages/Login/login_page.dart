@@ -30,9 +30,78 @@ class _LoginPageState extends State<LoginPage> {
             child: CircularProgressIndicator(),
           );
         });
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailTextController.text, password: passwordTextController.text);
-    Navigator.pop(context);
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailTextController.text,
+          password: passwordTextController.text);
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'network-request-failed') {
+        networkErrorMessage();
+      } else if (e.code == 'too-many-requests') {
+        tooManyAttemptsMessage();
+      } else {
+        wrongUserMessage();
+      }
+    }
+  }
+
+  void wrongUserMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("User not found"),
+            content: const Text(
+                "Please make sure your e-mail and password are correct."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void tooManyAttemptsMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Too many attempts"),
+            content: const Text(
+                "Due to wrong password attempts, your account has been temporarily disabled. Please try again later."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
+  void networkErrorMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Network error"),
+            content: const Text(
+                "Please check your internet connection and try again later."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+            ],
+          );
+        });
   }
 
   @override
