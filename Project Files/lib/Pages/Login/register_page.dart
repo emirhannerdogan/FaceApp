@@ -1,7 +1,9 @@
+import 'package:faceapp/Database/local_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:faceapp/Components/button.dart';
 import 'package:faceapp/Components/text_field.dart';
+import 'package:faceapp/Database/firestore_helper.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -33,6 +35,10 @@ class _RegisterPageState extends State<RegisterPage> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailTextController.text,
           password: passwordTextController.text);
+      await FirestoreHelper(uid: FirebaseAuth.instance.currentUser!.uid)
+          .registerUser(emailTextController.text);
+      LocalHelper.saveUserName(emailTextController.text);
+      LocalHelper.saveUserEmail(emailTextController.text);
       if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);

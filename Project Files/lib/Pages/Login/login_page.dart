@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:faceapp/Database/firestore_helper.dart';
+import 'package:faceapp/Database/local_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:faceapp/Components/button.dart';
@@ -34,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailTextController.text,
           password: passwordTextController.text);
+      LocalHelper.saveUserEmail(emailTextController.text);
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
