@@ -27,18 +27,29 @@ class _LoginPageState extends State<LoginPage> {
 
   void signUserIn() async {
     showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text);
-      LocalHelper.saveUserEmail(emailTextController.text);
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailTextController.text,
+        password: passwordTextController.text,
+      );
       Navigator.pop(context);
+      LocalHelper.saveUserEmail(emailTextController.text);
+      FirestoreHelper firestoreHelper =
+          FirestoreHelper(uid: userCredential.user!.uid);
+      QuerySnapshot userData =
+          await firestoreHelper.getUserData(emailTextController.text);
+
+      if (userData.docs.isNotEmpty) {
+        LocalHelper.saveUserName(userData.docs[0].get('name'));
+      }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       if (e.code == 'network-request-failed') {
