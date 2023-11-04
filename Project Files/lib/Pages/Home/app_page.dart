@@ -21,12 +21,13 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(style: TextStyle(color: Colors.white), "FaceApp"),
+        toolbarHeight: 45,
+        title: const Text(style: TextStyle(color: Colors.white70, fontSize: 20), "FaceApp"),
         backgroundColor: backgroundColor,
         actions: const [
           IconButton(
               onPressed: signUserOut,
-              icon: Icon(color: Colors.white, Icons.search))
+              icon: Icon(color: Colors.white70, Icons.search))
         ],
       ),
       backgroundColor: backgroundColor,
@@ -38,6 +39,7 @@ class _AppPageState extends State<AppPage> {
       bottomNavigationBar: CurvedNavigationBar(
         color: navigationbarColor,
         index: index,
+        height: 60,
         animationDuration: const Duration(milliseconds: 400),
         backgroundColor: backgroundColor,
         items: const [
