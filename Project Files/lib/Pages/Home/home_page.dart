@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 5,),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: Center(
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
