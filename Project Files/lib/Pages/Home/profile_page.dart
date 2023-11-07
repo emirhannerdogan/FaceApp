@@ -6,7 +6,7 @@ import '../../Components/profile_page_box.dart';
 class ProfilePage extends StatelessWidget {
   static const backgroundColor = Color.fromRGBO(31, 29, 54, 1);
 
-  const ProfilePage({Key? key});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
