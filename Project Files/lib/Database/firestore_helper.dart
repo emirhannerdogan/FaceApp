@@ -15,7 +15,7 @@ class FirestoreHelper {
       'email': email,
       'groups': [],
       'friends': [],
-      'inviations': [],
+      'invitations': [],
       'profilePic': '',
       'recogPic': '',
       'uid': uid,
