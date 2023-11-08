@@ -1,12 +1,37 @@
-import 'package:faceapp/Database/local_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../Components/profile_page_box.dart';
+import '../../Database/local_helper.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+
+
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  TextEditingController _userNameController = TextEditingController();
+  String userName = "User";
+  bool isEditing = false;
+
   static const backgroundColor = Color.fromRGBO(31, 29, 54, 1);
 
-  const ProfilePage({super.key});
+  void _startEditing() {
+    setState(() {
+      isEditing = true;
+      _userNameController.text = userName;
+    });
+  }
+
+  void _saveChanges() {
+    setState(() {
+      isEditing = false;
+      userName = _userNameController.text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +42,7 @@ class ProfilePage extends StatelessWidget {
         child: Center(
           child: FutureBuilder<dynamic>(
             future: LocalHelper.getUserName().then((value) => value.toString()),
-            builder: (context, snapshot) {
+            builder: (context, snapshot){
               String userName = snapshot.data ?? "User";
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,13 +59,45 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    userName,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 50,),
+                      Text(
+                        isEditing ? '' : userName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      isEditing
+                          ? Row(
+                        children: [
+                          Container(
+                            width: 250,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              controller: _userNameController,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.save, size: 20, color: Color.fromRGBO(233, 166, 166, 1)),
+                            onPressed: _saveChanges,
+                          ),
+                        ],
+                      )
+                          : IconButton(
+                        icon: Icon(Icons.edit, size: 20, color: Color.fromRGBO(233, 166, 166, 1)),
+                        onPressed: _startEditing,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   const ProfilePageBox(icon: Icons.key, text: "Account"),
@@ -48,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                   const ProfilePageBox(icon: Icons.settings, text: "Settings"),
                 ],
               );
-            },
+            }
           ),
         ),
       ),
