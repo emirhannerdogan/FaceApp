@@ -17,7 +17,7 @@ class PeoplePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +30,7 @@ class PeoplePage extends StatelessWidget {
                   child: SizedBox(
                       width: screenSize.width * 0.465,
                       height: screenSize.height * 0.06,
-                      child: Row(
+                      child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -41,7 +41,7 @@ class PeoplePage extends StatelessWidget {
                         ],
                       )),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 DecoratedBox(
                   decoration: BoxDecoration(
                       color: const Color.fromRGBO(63, 51, 81, 1),
@@ -50,7 +50,7 @@ class PeoplePage extends StatelessWidget {
                   child: SizedBox(
                       width: screenSize.width * 0.465,
                       height: screenSize.height * 0.06,
-                      child: Row(
+                      child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -64,18 +64,18 @@ class PeoplePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             SizedBox(
               width: screenSize.width * 0.95,
               height: screenSize.height * 0.06,
               child: SearchBar(
                 backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white24),
                 hintText: "Search",
-                hintStyle: MaterialStateProperty.resolveWith((states) => TextStyle(color: Colors.white70)),
-                textStyle: MaterialStateProperty.resolveWith((states) => TextStyle(color: Colors.white,)),
+                hintStyle: MaterialStateProperty.resolveWith((states) => const TextStyle(color: Colors.white70)),
+                textStyle: MaterialStateProperty.resolveWith((states) => const TextStyle(color: Colors.white,)),
               ),),
-            SizedBox(height: 10,),
-            Expanded(
+            const SizedBox(height: 10,),
+            const Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.only(bottom: 10),
                 child: Center(
@@ -146,7 +146,7 @@ class PeoplePage extends StatelessWidget {
               
               ),
             ),
-            SizedBox(height: 15,)
+            const SizedBox(height: 15,)
           ]
         ),
       ),

@@ -23,7 +23,7 @@ class FirestoreHelper {
   }
 
   Future updateUserName(String name) async {
-    return await users.doc(uid).set({
+    return await users.doc(uid).update({
       'name': name,
     });
   }
