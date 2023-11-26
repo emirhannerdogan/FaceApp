@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../Components/profile_page_box.dart';
 import '../../Database/local_helper.dart';
@@ -16,8 +18,22 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _userNameController = TextEditingController();
   String userName = "User";
   bool isEditing = false;
+  String? profilePicture;
 
   static const backgroundColor = Color.fromRGBO(31, 29, 54, 1);
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfilePicture();
+  }
+
+  Future<void> _loadProfilePicture() async {
+    final picture = await LocalHelper.getProfilePicture();
+    setState(() {
+      profilePicture = picture;
+    });
+  }
 
   void startEditing() async {
     String? savedUserName = await LocalHelper.getUserName();
@@ -73,11 +89,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       CircleAvatar(
                         radius: screenSize.height * 0.08,
                         backgroundColor: const Color.fromRGBO(233, 166, 166, 1),
-                        child: const Icon(
-                          Icons.person,
-                          size: 100,
-                          color: Color.fromRGBO(31, 29, 54, 1),
-                        ),
+                        child: profilePicture != null
+                            ? ClipOval(
+                                child: Image.file(
+                                  File(profilePicture!),
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : const Icon(
+                                Icons.person,
+                                size: 100,
+                                color: Color.fromRGBO(31, 29, 54, 1),
+                              ),
                       ),
                       const SizedBox(width: 20),
                       IconButton(

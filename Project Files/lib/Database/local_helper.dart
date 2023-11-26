@@ -20,4 +20,14 @@ class LocalHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userEmail');
   }
+
+  static Future<void> saveProfilePicture(String imagePath) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('profilePicture', imagePath);
+  }
+
+  static Future<String?> getProfilePicture() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('profilePicture');
+  }
 }

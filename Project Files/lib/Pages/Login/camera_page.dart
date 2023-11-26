@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:faceapp/Database/local_helper.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -48,9 +49,7 @@ class _CameraPageState extends State<CameraPage> {
   Future<void> _captureAndDisplayPhoto() async {
     try {
       await _initializeControllerFuture;
-
       final image = await _cameraController.takePicture();
-
       setState(() {
         _capturedImage = image;
       });
@@ -63,6 +62,16 @@ class _CameraPageState extends State<CameraPage> {
     setState(() {
       _capturedImage = null;
     });
+  }
+
+  Future<void> _saveAndNavigateToProfile() async {
+    if (_capturedImage != null) {
+      // Save the captured image path to SharedPreferences
+      await LocalHelper.saveProfilePicture(_capturedImage!.path);
+
+      // Navigate to the ProfilePage
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -103,7 +112,7 @@ class _CameraPageState extends State<CameraPage> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          // Implement save logic here
+                          _saveAndNavigateToProfile();
                         },
                         child: const Text('Save'),
                       ),
