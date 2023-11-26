@@ -184,56 +184,56 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 // Logo
                 const Icon(Icons.lock, size: 100),
-          
+
                 const SizedBox(
                   height: 50,
                 ),
-          
+
                 Text(
                   "SIGN UP NOW!",
                   style: TextStyle(color: Colors.grey[700]),
                 ),
-          
+
                 const SizedBox(
                   height: 25,
                 ),
-          
+
                 MyTextField(
                     controller: emailTextController,
                     hintText: 'E-mail',
                     obscureText: false),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
-          
+
                 MyTextField(
                     controller: passwordTextController,
                     hintText: 'Password',
                     obscureText: true),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
-          
+
                 MyTextField(
                     controller: confirmPasswordTextController,
                     hintText: 'Enter password again',
                     obscureText: true),
-          
+
                 const SizedBox(
                   height: 25,
                 ),
-          
+
                 MyButton(
                   onTap: signUp,
                   buttonText: "Sign up",
                 ),
-          
+
                 const SizedBox(
                   height: 25,
                 ),
-          
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

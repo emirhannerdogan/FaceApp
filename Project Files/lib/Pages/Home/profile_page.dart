@@ -1,8 +1,9 @@
-import 'package:faceapp/Database/firestore_helper.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Components/profile_page_box.dart';
 import '../../Database/local_helper.dart';
+import 'package:faceapp/Pages/Login/camera_page.dart';
+import '../../Database/firestore_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -42,6 +43,13 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  void navigateToCameraPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CameraPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -50,80 +58,95 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SafeArea(
         child: Center(
           child: FutureBuilder<dynamic>(
-              future:
-                  LocalHelper.getUserName().then((value) => value.toString()),
-              builder: (context, snapshot) {
-                String userName = snapshot.data ?? "User";
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    CircleAvatar(
-                      radius: screenSize.height * 0.08,
-                      backgroundColor: const Color.fromRGBO(233, 166, 166, 1),
-                      child: const Icon(
-                        Icons.person,
-                        size: 100,
-                        color: Color.fromRGBO(31, 29, 54, 1),
+            future: LocalHelper.getUserName().then((value) => value.toString()),
+            builder: (context, snapshot) {
+              String userName = snapshot.data ?? "User";
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: screenSize.height * 0.08,
+                        backgroundColor: const Color.fromRGBO(233, 166, 166, 1),
+                        child: const Icon(
+                          Icons.person,
+                          size: 100,
+                          color: Color.fromRGBO(31, 29, 54, 1),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 50,
+                      const SizedBox(width: 20),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.edit,
+                          size: 20,
+                          color: Colors.white,
                         ),
-                        Text(
-                          isEditing ? '' : userName,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        onPressed: () {
+                          navigateToCameraPage(context);
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      Text(
+                        isEditing ? '' : userName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        isEditing
-                            ? Row(
-                                children: [
-                                  SizedBox(
-                                    width: 250,
-                                    child: TextField(
-                                      textAlign: TextAlign.center,
-                                      controller: _userNameController,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                      ),
+                      isEditing
+                          ? Row(
+                              children: [
+                                SizedBox(
+                                  width: 250,
+                                  child: TextField(
+                                    textAlign: TextAlign.center,
+                                    controller: _userNameController,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.save,
-                                        size: 20,
-                                        color:
-                                            Color.fromRGBO(233, 166, 166, 1)),
-                                    onPressed: saveChanges,
-                                  ),
-                                ],
-                              )
-                            : IconButton(
-                                icon: const Icon(Icons.edit,
-                                    size: 20,
-                                    color: Color.fromRGBO(233, 166, 166, 1)),
-                                onPressed: startEditing,
-                              ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    const ProfilePageBox(icon: Icons.key, text: "Account"),
-                    const SizedBox(height: 10),
-                    const ProfilePageBox(
-                        icon: Icons.settings, text: "Settings"),
-                  ],
-                );
-              }),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.save,
+                                      size: 20,
+                                      color: Color.fromRGBO(233, 166, 166, 1)),
+                                  onPressed: saveChanges,
+                                ),
+                              ],
+                            )
+                          : IconButton(
+                              icon: const Icon(Icons.edit,
+                                  size: 20,
+                                  color: Color.fromRGBO(233, 166, 166, 1)),
+                              onPressed: startEditing,
+                            ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const ProfilePageBox(icon: Icons.key, text: "Account"),
+                  const SizedBox(height: 10),
+                  const ProfilePageBox(icon: Icons.settings, text: "Settings"),
+                ],
+              );
+            },
+          ),
         ),
       ),
       backgroundColor: backgroundColor,
