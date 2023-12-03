@@ -8,7 +8,8 @@ import '../../Database/firestore_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final Function()? refreshProfile;
+  const ProfilePage({Key? key, this.refreshProfile}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -62,7 +63,10 @@ class _ProfilePageState extends State<ProfilePage> {
   void navigateToCameraPage(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CameraPage()),
+      MaterialPageRoute(
+          builder: (context) => CameraPage(
+                refreshProfile: _loadProfilePicture,
+              )),
     );
   }
 
@@ -94,6 +98,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Image.file(
                                   File(profilePicture!),
                                   fit: BoxFit.cover,
+                                  width: screenSize.height *
+                                      0.16, // Adjust image size
+                                  height: screenSize.height *
+                                      0.16, // Adjust image size
                                 ),
                               )
                             : const Icon(

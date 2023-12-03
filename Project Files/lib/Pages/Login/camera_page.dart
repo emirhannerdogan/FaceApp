@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:faceapp/Database/local_helper.dart';
 
 class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key}) : super(key: key);
+  final Function()? refreshProfile;
+  const CameraPage({Key? key, this.refreshProfile}) : super(key: key);
 
   @override
   _CameraPageState createState() => _CameraPageState();
@@ -13,7 +15,8 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   late CameraController _cameraController;
   late Future<void> _initializeControllerFuture;
-  XFile? _capturedImage;
+  File? _capturedImage;
+  final picker = ImagePicker();
   static const backgroundColor = Color.fromRGBO(31, 29, 54, 1);
 
   @override
@@ -51,7 +54,7 @@ class _CameraPageState extends State<CameraPage> {
       await _initializeControllerFuture;
       final image = await _cameraController.takePicture();
       setState(() {
-        _capturedImage = image;
+        _capturedImage = File(image.path);
       });
     } catch (e) {
       print('Error capturing photo: $e');
@@ -64,12 +67,19 @@ class _CameraPageState extends State<CameraPage> {
     });
   }
 
+  Future<void> _openGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _capturedImage = File(pickedFile.path);
+      });
+    }
+  }
+
   Future<void> _saveAndNavigateToProfile() async {
     if (_capturedImage != null) {
-      // Save the captured image path to SharedPreferences
       await LocalHelper.saveProfilePicture(_capturedImage!.path);
-
-      // Navigate to the ProfilePage
+      widget.refreshProfile?.call();
       Navigator.pop(context);
     }
   }
@@ -81,60 +91,60 @@ class _CameraPageState extends State<CameraPage> {
         title: const Text('Take a Selfie'),
         backgroundColor: backgroundColor,
       ),
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Column(
+      body: Column(
+        children: [
+          Expanded(
+            child: _capturedImage != null
+                ? Image.file(
+                    _capturedImage!,
+                    fit: BoxFit.cover,
+                  )
+                : FutureBuilder<void>(
+                    future: _initializeControllerFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return CameraPreview(_cameraController);
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
+          ),
+          if (_capturedImage != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: _capturedImage != null
-                            ? Transform(
-                                alignment: Alignment.center,
-                                transform:
-                                    Matrix4.rotationY(180 * 3.1415927 / 180),
-                                child: Image.file(
-                                  File(_capturedImage!.path),
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : CameraPreview(_cameraController),
-                      ),
-                    ],
-                  ),
+                ElevatedButton(
+                  onPressed: () {
+                    _saveAndNavigateToProfile();
+                  },
+                  child: const Text('Save'),
                 ),
-                if (_capturedImage != null)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _saveAndNavigateToProfile();
-                        },
-                        child: const Text('Save'),
-                      ),
-                      const SizedBox(width: 20),
-                      ElevatedButton(
-                        onPressed: _resetCapture,
-                        child: const Text('Back'),
-                      ),
-                    ],
-                  ),
-                if (_capturedImage == null)
-                  ElevatedButton.icon(
-                    onPressed: _captureAndDisplayPhoto,
-                    icon: const Icon(Icons.camera),
-                    label: const Text('Take Photo'),
-                  ),
+                const SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: _resetCapture,
+                  child: const Text('Back'),
+                ),
               ],
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+            ),
+          if (_capturedImage == null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: _captureAndDisplayPhoto,
+                  icon: const Icon(Icons.camera),
+                  label: const Text('Take Photo'),
+                ),
+                const SizedBox(width: 20),
+                ElevatedButton.icon(
+                  onPressed: _openGallery,
+                  icon: const Icon(Icons.photo),
+                  label: const Text('Open Gallery'),
+                ),
+              ],
+            ),
+        ],
       ),
       backgroundColor: backgroundColor,
     );
