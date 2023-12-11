@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:faceapp/Database/local_helper.dart';
+import 'package:faceapp/Database/firestore_helper.dart';
 
 class CameraPage extends StatefulWidget {
   final Function()? refreshProfile;
@@ -79,6 +80,13 @@ class _CameraPageState extends State<CameraPage> {
   Future<void> _saveAndNavigateToProfile() async {
     if (_capturedImage != null) {
       await LocalHelper.saveProfilePicture(_capturedImage!.path);
+
+      String? userId = await LocalHelper.getUserId();
+
+      if (userId != null) {
+        await FirestoreHelper().uploadProfilePicture(userId, _capturedImage!);
+      }
+
       widget.refreshProfile?.call();
       Navigator.pop(context);
     }

@@ -6,6 +6,11 @@ class LocalHelper {
     await prefs.setString('userName', name);
   }
 
+  static Future<void> clearAllData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   static Future<String?> getUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userName');
@@ -19,6 +24,16 @@ class LocalHelper {
   static Future<String?> getUserEmail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userEmail');
+  }
+
+  static Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userId');
+  }
+
+  static Future<void> saveUserId(String userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', userId);
   }
 
   static Future<void> saveProfilePicture(String imagePath) async {

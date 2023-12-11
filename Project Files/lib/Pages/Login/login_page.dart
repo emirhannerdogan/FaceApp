@@ -44,11 +44,15 @@ class _LoginPageState extends State<LoginPage> {
       LocalHelper.saveUserEmail(emailTextController.text);
       FirestoreHelper firestoreHelper =
           FirestoreHelper(uid: userCredential.user!.uid);
+      LocalHelper.saveUserId(userCredential.user!.uid);
       QuerySnapshot userData =
           await firestoreHelper.getUserData(emailTextController.text);
 
       if (userData.docs.isNotEmpty) {
         LocalHelper.saveUserName(userData.docs[0].get('name'));
+        String downloadURL = userData.docs[0].get('recogPic');
+        await firestoreHelper.downloadAndSaveProfilePicture(
+            userCredential.user!.uid, downloadURL);
       }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -142,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                       controller = StateMachineController.fromArtboard(
                           artboard, "Login Machine");
                       if (controller == null) return;
-          
+
                       artboard.addController(controller!);
                       isChecking = controller?.findInput("isChecking");
                       isHandsUp = controller?.findInput("isHandsUp");
@@ -157,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                       isHandsUp!.change(false);
                     }
                     if (isChecking == null) return;
-          
+
                     isChecking!.change(true);
                   },
                   controller: emailTextController,
@@ -177,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                       isChecking!.change(false);
                     }
                     if (isHandsUp == null) return;
-          
+
                     isHandsUp!.change(true);
                   },
                   controller: passwordTextController,
@@ -201,16 +205,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 25,
                 ),
-          
+
                 MyButton(
                   onTap: signUserIn,
                   buttonText: "Log in",
                 ),
-          
+
                 const SizedBox(
                   height: 25,
                 ),
-          
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

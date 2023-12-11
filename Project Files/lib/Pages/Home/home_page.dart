@@ -1,3 +1,4 @@
+import 'package:faceapp/Database/local_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:faceapp/Components/home_page_message_box.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget {
 // sign out için kullanılacak kod
 void signUserOut() {
   FirebaseAuth.instance.signOut();
+  LocalHelper.clearAllData();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -21,115 +23,118 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: 5,),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Center(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          HomePageMessageBox(
-                            username: 'Alper Özdemir',
-                            message: 'Emirhan bu ödevi yapamaz',
-                            shortName: 'AÖ',
-                          ),
-                          SizedBox(height: 10),
-                          HomePageMessageBox(
-                            username: 'Emirhan Erdoğan',
-                            message: 'Alper yine zorla spora götürdü',
-                            shortName: 'EE',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          HomePageMessageBox(
-                            username: 'Eren Başpınar',
-                            message: 'Bizi kimse sevmedi albayım',
-                            shortName: 'EB',
-                          )
-                        ]),
-                  ),
-                ),
+        child: Column(children: [
+          SizedBox(
+            height: 5,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Center(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      HomePageMessageBox(
+                        username: 'Alper Özdemir',
+                        message: 'Emirhan bu ödevi yapamaz',
+                        shortName: 'AÖ',
+                      ),
+                      SizedBox(height: 10),
+                      HomePageMessageBox(
+                        username: 'Emirhan Erdoğan',
+                        message: 'Alper yine zorla spora götürdü',
+                        shortName: 'EE',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HomePageMessageBox(
+                        username: 'Eren Başpınar',
+                        message: 'Bizi kimse sevmedi albayım',
+                        shortName: 'EB',
+                      )
+                    ]),
               ),
-              SizedBox(height: 15,)
-            ]
-          ),),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          )
+        ]),
+      ),
       backgroundColor: backgroundColor,
     );
   }

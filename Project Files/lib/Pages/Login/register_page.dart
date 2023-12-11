@@ -37,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
           password: passwordTextController.text);
       await FirestoreHelper(uid: FirebaseAuth.instance.currentUser!.uid)
           .registerUser(emailTextController.text);
+      LocalHelper.saveUserId(FirebaseAuth.instance.currentUser!.uid);
       LocalHelper.saveUserName(emailTextController.text);
       LocalHelper.saveUserEmail(emailTextController.text);
       if (context.mounted) Navigator.pop(context);
